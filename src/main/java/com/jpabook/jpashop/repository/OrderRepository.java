@@ -30,7 +30,7 @@ public class OrderRepository {
 
        if(orderSearch.getOrderStatus() != null){
            if(isFirstCondition){
-               jpql = " where";
+               jpql += " where";
                isFirstCondition = false;
            }else{
                jpql += " and";
@@ -40,12 +40,12 @@ public class OrderRepository {
 
         if(StringUtils.hasText(orderSearch.getMemberName())){
             if(isFirstCondition){
-                jpql = " where";
+                jpql += " where";
                 isFirstCondition = false;
             }else{
                 jpql += " and";
             }
-            jpql += " m.name = :name";
+            jpql += " m.name like :name";
         }
 
         TypedQuery<Order> query = em.createQuery(jpql, Order.class).setMaxResults(1000);
